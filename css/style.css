@@ -1,6 +1,9 @@
 /* GLOBAL ============================================== */
 :root {
     --dark-blue: #363f5f;
+    --green: #49AA26;
+    --light-green: #3dd705;
+    --red: #e92929;
 }
 
 * {
@@ -9,8 +12,8 @@
     box-sizing: border-box;
 }
 
-html{
-    font-size: 93.75%; 
+html {
+    font-size: 93.75%;
     /* 15px */
 }
 
@@ -18,14 +21,15 @@ body {
     background-color: #f0f2f5;
     font-family: 'poppins', sans-serif;
 }
-.sr-only{
-    position:absolute;
+
+.sr-only {
+    position: absolute;
     width: 1px;
     height: 1px;
     padding: 0;
-    margin:-1px;
-    overflow:hidden;
-    clip: rect(0,0,0,0);
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
 }
@@ -47,25 +51,54 @@ h2 {
 
 /* LINKS AND BUTTONS ============================================ */
 
-a{
-    color: #49AA26;
+a {
+    color:var(--green);
+    text-decoration: none;
 }
 
-a:hover{
-    color: #3dd705;
+a:hover {
+    color: var(--light-green);
 }
 
-.button.new{
+button{
+    width: 100%;
+    height: 50px;
+    color: white;
+    background: var(--green);
+    border: none;
+    border-radius: .25rem;
+    cursor: pointer;
+}
+button:hover{
+    background: var(--light-green);
+}
+
+.button.new {
+
     display: inline-block;
     margin-bottom: 0.8rem;
 }
 
+.button.cancel{
+    color: var(--red);
+    border:2px solid var(--red);
+    border-radius: 0.25rem;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.6;
+}
+
+.button.cancel:hover{
+    opacity: 1;
+}
 
 /* HEADER ============================================ */
 
 header {
     background: #2d4a22;
-    padding: 2rem 0 10rem;
+    padding: 2rem 0rem 12rem;
     text-align: center;
 }
 
@@ -98,8 +131,8 @@ header {
 .card h3 {
     font-weight: normal;
     font-size: 1rem;
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -110,22 +143,23 @@ header {
 }
 
 .card.total {
-    background: #49aa26;
+    background: var(--green);
     color: white;
 }
 
 /* TABLE  ============================================ */
-#transaction{
+#transaction {
     display: block;
     width: 100%;
     overflow-x: auto;
 }
+
 #data-table {
-   
+
     width: 100%;
     border-spacing: 0rem 0.5rem;
     color: #969cb3;
-    
+
 }
 
 table thead tr th:first-child,
@@ -133,6 +167,7 @@ table tbody tr td:first-child {
 
     border-radius: 0.5rem 0 0 0.5rem;
 }
+
 table thead tr th:last-child,
 table tbody tr td:last-child {
 
@@ -146,7 +181,7 @@ table th {
     text-align: left;
 }
 
-table tr{
+table tr {
     opacity: 0.7;
 }
 
@@ -154,7 +189,7 @@ table tbody tr:hover {
     opacity: 1;
 }
 
-table thead tr{
+table thead tr {
     opacity: 1;
 }
 
@@ -163,30 +198,31 @@ table td {
     padding: 1rem 2rem;
 }
 
-td.description{
+td.description {
     color: var(--dark-blue);
 }
 
-td.income{
+td.income {
     color: #12a454;
 }
 
-td.expense{
+td.expense {
     color: #e92929;
 }
 
 
 /* MODAL  ============================================ */
 
-.modal-overlay{
+.modal-overlay {
     width: 100%;
-    height:100%;
-    
-    
-    background: rgba(0,0,0,0.7);
+    height: 100%;
+
+
+    background: rgba(0, 0, 0, 0.7);
 
     position: fixed;
-    top:0;
+    top: 0;
+    z-index: 999;
 
     display: flex;
     align-items: center;
@@ -196,18 +232,24 @@ td.expense{
     visibility: hidden;
 }
 
-.modal-overlay.active{
+.modal-overlay.active {
     opacity: 1;
     visibility: visible;
 }
 
 
 
-.modal{
+.modal {
+
+    /* position: fixed;
+    top:25%; */
+    position: relative;
+    z-index: 999;
     width: 90%;
     max-width: 500px;
     background: #f0f2f5;
     padding: 2.4rem;
+  
 
 
 }
@@ -215,14 +257,41 @@ td.expense{
 
 /* FORM  ============================================ */
 
-#form h2{
-    margin-top:0;
+#form h2 {
+    margin-top: 0;
 }
 
-input{
+input {
+
     border: none;
     border-radius: 0.2rem;
+    padding: 0.8rem;
+    width: 100%;
+
 }
+
+.input-group {
+    margin-top: 0.8rem
+}
+
+.input-group small {
+    opacity: 0.4;
+    font-weight: 400;
+}
+
+.input-group.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-group.actions .button,
+.input-group.actions button {
+    width: 48%;
+}
+
+
+
 
 
 
@@ -230,7 +299,9 @@ input{
 /* FOOTER  ============================================ */
 
 footer {
-    text-align: center;
+
+    display: flex;
+    justify-content: center;
     padding: 4rem 0 2rem;
     color: var(--dark-blue);
     opacity: 0.6;
@@ -240,11 +311,11 @@ footer {
 
 @media (min-width: 800px) {
 
-    html{
-        font-size:87.5%;
+    html {
+        font-size: 87.5%;
     }
 
-    #balance{
+    #balance {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 2rem;
