@@ -36,18 +36,48 @@ const transactions = [{
         date: '23/01/2021',
     },
 
-
 ]
 
 const Transaction = {
+
+    all:transactions,
+    add(transaction){
+        Transaction.all.push(transaction)
+
+        App.reload()
+    },
+
     incomes() {
-        //somar as entradas
+        let income = 0;
+        //pegar todas as transações
+        Transaction.all.forEach(transaction => {
+        //para cada transacao, se ela for maior que zero
+        if(transaction.amount > 0){
+         //somar a uma variavel e retornar variavel
+         income += transaction.amount
+        }
+        })
+       
+        return income
     },
     expenses() {
-        // somar as despesas
+        let expense = 0;
+        //pegar todas as transações
+        Transaction.all.forEach(transaction => {
+        //para cada transacao, se ela for menor que zero
+        if(transaction.amount < 0){
+         //somar a uma variavel e retornar variavel
+         expense += transaction.amount
+        }
+       
+
+        })
+
+        return expense
     },
     total() {
-        //subtrair o valor das depesas dos valores das entradas
+
+        return Transaction.incomes() + Transaction.expenses()
     }
 }
 
@@ -80,6 +110,17 @@ const DOM = {
 
         return html
 
+    },
+
+    updateBalance(){
+        document.getElementById('incomeDisplay').innerHTML = Utils.formatCurrency(Transaction.incomes())
+        document.getElementById('expenseDisplay').innerHTML = Utils.formatCurrency(Transaction.expenses())
+        document.getElementById('totalDisplay').innerHTML = Utils.formatCurrency(Transaction.total())
+        
+    },
+    
+    clearTransactions(){
+        DOM
     }
 }
 
@@ -102,6 +143,35 @@ const Utils = {
     }
 }
 
-transactions.forEach(function (transaction) {
-    DOM.addTransaction(transaction)
+const App = {
+    init(){
+
+        Transaction.all.forEach(transaction => {
+            DOM.addTransaction(transaction)
+        })
+        
+        DOM.updateBalance()
+    }, 
+    reload(){
+        App.init()
+
+    }
+}
+
+App.init()
+
+
+
+Transaction.add({
+    id:39,
+    description:'Alo',
+    amount:200,
+    date:'23/01/2021'
 })
+
+
+
+
+
+
+
